@@ -23,7 +23,8 @@ public class UserFavorites extends BaseTimeEntity {
     private State state;
 
     @Builder
-    public UserFavorites(State state){
+    public UserFavorites(UserFavoritesId userFavoritesId, State state){
+        this.userFavoritesId = userFavoritesId;
         this.state = state;
     }
 

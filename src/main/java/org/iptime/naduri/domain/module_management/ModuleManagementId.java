@@ -1,5 +1,6 @@
 package org.iptime.naduri.domain.module_management;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
@@ -30,7 +31,8 @@ public class ModuleManagementId implements Serializable {
     @JoinColumn(name = "moduleId")
     private Module module;
 
-    public void setModuleManagementId(UserInfo userInfo, Module module){
+    @Builder
+    public ModuleManagementId(UserInfo userInfo, Module module){
         this.userInfo = userInfo;
         this.module = module;
     }

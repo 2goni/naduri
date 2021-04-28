@@ -1,12 +1,12 @@
 package org.iptime.naduri.domain.course_in_module;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.iptime.naduri.domain.course.Course;
 import org.iptime.naduri.domain.module.Module;
-import org.iptime.naduri.domain.user_info.UserInfo;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
@@ -30,7 +30,8 @@ public class CourseInModuleId implements Serializable {
     @JoinColumn(name = "moduleId")
     private Module module;
 
-    public void setUserFavoritesId(Course course, Module module){
+    @Builder
+    public CourseInModuleId(Course course, Module module){
         this.course = course;
         this.module = module;
     }

@@ -24,7 +24,7 @@ public class CourseInModule extends BaseTimeEntity {
     private String courseInModuleContents;
 
     @Builder
-    public void setCourseInModule(CourseInModuleId courseInModuleId, String courseInModuleTag, String courseInModuleContents){
+    public CourseInModule(CourseInModuleId courseInModuleId, String courseInModuleTag, String courseInModuleContents){
         this.courseInModuleId = courseInModuleId;
         this.courseInModuleTag = courseInModuleTag;
         this.courseInModuleContents = courseInModuleContents;

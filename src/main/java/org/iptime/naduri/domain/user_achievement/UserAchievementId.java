@@ -1,5 +1,6 @@
 package org.iptime.naduri.domain.user_achievement;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
@@ -36,7 +37,8 @@ public class UserAchievementId implements Serializable {
     @JoinColumn(name = "moduleId")
     private Module module;
 
-    public void setUserFavoritesId(UserInfo userInfo, Course course, Module module){
+    @Builder
+    public UserAchievementId(UserInfo userInfo, Course course, Module module){
         this.userInfo = userInfo;
         this.course = course;
         this.module = module;

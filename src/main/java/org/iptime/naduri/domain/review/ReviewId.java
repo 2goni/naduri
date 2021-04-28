@@ -1,5 +1,6 @@
 package org.iptime.naduri.domain.review;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
@@ -28,7 +29,8 @@ public class ReviewId implements Serializable {
     @JoinColumn(name = "courseId")
     private Course course;
 
-    public void setReviewId(UserInfo userInfo, Course course){
+    @Builder
+    public ReviewId(UserInfo userInfo, Course course){
         this.userInfo = userInfo;
         this.course = course;
     }

@@ -1,5 +1,6 @@
 package org.iptime.naduri.domain.user_favorites;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +31,8 @@ public class UserFavoritesId implements Serializable {
     @JoinColumn(name = "courseId")
     private Course course;
 
-    public void setUserFavoritesId(UserInfo userInfo, Course course){
+    @Builder
+    public UserFavoritesId(UserInfo userInfo, Course course){
         this.userInfo = userInfo;
         this.course = course;
     }

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.iptime.naduri.domain.BaseTimeEntity;
-import sun.security.util.Length;
 
 import javax.persistence.*;
 
@@ -40,7 +39,6 @@ public class UserInfo extends BaseTimeEntity {
     private Integer age;
 
     //경험치, 기본값 0;
-    @Column(nullable = false)
     @ColumnDefault("0")
     private Long experience = 0l;
 

@@ -57,17 +57,17 @@ public class DomainsTest {
     ModuleManagementRepository moduleManagementRepository;
 
     //테스트 종료 후 데이터 전부 지우기, 주의!! 재 빌드시 데이터베이스에 데이터가 전부 삭제됩니다.
-//    @AfterEach
-//    public void cleanUp() {
-//        userInfoRepository.deleteAll();
-//        courseRepository.deleteAll();
-//        moduleRepository.deleteAll();
-//        userFavoritesRepository.deleteAll();
-//        userAchievementRepository.deleteAll();
-//        courseInModuleRepository.deleteAll();
-//        reviewRepository.deleteAll();
-//        moduleManagementRepository.deleteAll();
-//    }
+    @AfterEach
+    public void cleanUp() {
+        userInfoRepository.deleteAll();
+        courseRepository.deleteAll();
+        moduleRepository.deleteAll();
+        userFavoritesRepository.deleteAll();
+        userAchievementRepository.deleteAll();
+        courseInModuleRepository.deleteAll();
+        reviewRepository.deleteAll();
+        moduleManagementRepository.deleteAll();
+    }
 
     //테스트 메소드(각 테이블에 데이터 넣기, 데이터 읽기확인)
     @Test

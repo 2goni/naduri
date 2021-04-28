@@ -22,6 +22,7 @@ import org.iptime.naduri.domain.user_favorites.UserFavorites;
 import org.iptime.naduri.domain.user_favorites.UserFavoritesId;
 import org.iptime.naduri.domain.user_favorites.UserFavoritesRepository;
 import org.iptime.naduri.domain.user_info.Gender;
+import org.iptime.naduri.domain.user_info.Platform;
 import org.iptime.naduri.domain.user_info.UserInfo;
 import org.iptime.naduri.domain.user_info.UserInfoRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -76,6 +77,7 @@ public class DomainsTest {
         userInfoRepository.save(UserInfo.builder()
                 .nickName("테스트 닉네임")
                 .email("test@test.com")
+                .platform(Platform.Google)
                 .profilePicture("testprofile.url")
                 .gender(Gender.Male)
                 .age(10)

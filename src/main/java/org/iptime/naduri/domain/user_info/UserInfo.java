@@ -27,6 +27,10 @@ public class UserInfo extends BaseTimeEntity {
     @Column(nullable = false)
     private String email;
 
+    //로그인 플랫폼
+    @Column(nullable = false)
+    private Platform platform;
+
     //사진(url 주소), OAuth2에서 가져올 정보, null 허용
     @Column(length = 500)
     private String profilePicture;
@@ -43,9 +47,10 @@ public class UserInfo extends BaseTimeEntity {
     private Long experience = 0l;
 
     @Builder
-    public UserInfo(String nickName, String email, String profilePicture, Gender gender, Integer age, Long experience){
+    public UserInfo(String nickName, String email,Platform platform, String profilePicture, Gender gender, Integer age, Long experience){
         this.nickName = nickName;
         this.email = email;
+        this.platform = platform;
         this.profilePicture = profilePicture;
         this.gender = gender;
         this.age = age;

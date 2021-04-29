@@ -29,6 +29,7 @@ public class UserInfo extends BaseTimeEntity {
 
     //로그인 플랫폼
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Platform platform;
 
     //사진(url 주소), OAuth2에서 가져올 정보, null 허용

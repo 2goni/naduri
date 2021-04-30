@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>회원가입</title>
+    <title>SignUp</title>
 </head>
 <body>
-    되남?
-<button onclick="href:'/'"/>
+    <form action="/signupuser" method="post">
+        성별:<br>
+        <input name="gender" value="Male" type="radio" required /> 남자 <br>
+        <input name="gender" value="Female" type="radio" required /> 여자 <br>
+        나이 <input name="age" type="number" required/>
+
+        <input type="submit" value="회원가입하기">
+    </form>
+
 </body>
 </html>

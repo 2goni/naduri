@@ -10,7 +10,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import javax.servlet.http.HttpSession;
-
+// @LoginUser 애노테이션이 파라미터에서 사용될수 있도록 설정
 @RequiredArgsConstructor
 @Component
 public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.Optional;
-
+//로그인 API를 사용하고 UserInfo에 담긴 값을 DB에 저장함
 @RequiredArgsConstructor
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
@@ -45,14 +45,14 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey());
     }
-
+    // UserInfo에 담긴 값 DB에 저장하는 메소드
     private UserInfo save(OAuthAttributes attributes){
         UserInfo user = userInfoRepository.findByEmailAndPlatform(attributes.getEmail(), attributes.getPlatform())
                 .orElse(attributes.toEntity());
         return userInfoRepository.save(user);
 
     }
-
+    // 사용자가 회원인지 확인하는 메소드
     private void checkUser(OAuthAttributes attributes){
         Optional<UserInfo> user = userInfoRepository.findByEmailAndPlatform(attributes.getEmail(), attributes.getPlatform());
         checkUser.userSet(user.isPresent());

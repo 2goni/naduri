@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.iptime.naduri.config.auth.LoginUser;
 import org.iptime.naduri.config.auth.dto.CheckUser;
 import org.iptime.naduri.config.auth.dto.SessionUser;
+import org.iptime.naduri.config.auth.dto.SignUpUser;
 import org.iptime.naduri.domain.user_info.UserInfo;
 import org.iptime.naduri.domain.user_info.UserInfoRepository;
 import org.springframework.stereotype.Controller;
@@ -30,8 +31,17 @@ public class LoginController {
     }
 
     @PostMapping("/signupuser")
-    public String signUpUser(@LoginUser SessionUser user){
-
+    public String signUpUser(@LoginUser SessionUser user, SignUpUser signUpUser){
+        UserInfo userInfo = UserInfo.builder()
+                .nickName(user.getNickName())
+                .age(signUpUser.getAge())
+                .profilePicture(user.getProfilepicture())
+                .email(user.getEmail())
+                .platform(user.getPlatform())
+                .gender(signUpUser.getGender())
+                .build();
+        userInfoRepository.save(userInfo);
+        checkUser.userSet(true);
         return "redirect:/";
     }
 }

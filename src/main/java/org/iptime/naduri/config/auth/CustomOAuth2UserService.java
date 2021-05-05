@@ -38,24 +38,24 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
         checkUser(attributes);
-        UserInfo user = save(attributes);
+        UserInfo user = getUser(attributes);
         httpSession.setAttribute("user", new SessionUser(user));
 
         return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getNickName())),
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey());
     }
-    // UserInfo에 담긴 값 DB에 저장하는 메소드
-    private UserInfo save(OAuthAttributes attributes){
+    // attribute에 담긴 값 UserIfo에 매칭시키는 메소드
+    private UserInfo getUser(OAuthAttributes attributes){
         UserInfo user = userInfoRepository.findByEmailAndPlatform(attributes.getEmail(), attributes.getPlatform())
                 .orElse(attributes.toEntity());
-        return userInfoRepository.save(user);
-
+        return user;
     }
     // 사용자가 회원인지 확인하는 메소드
     private void checkUser(OAuthAttributes attributes){
         Optional<UserInfo> user = userInfoRepository.findByEmailAndPlatform(attributes.getEmail(), attributes.getPlatform());
         checkUser.userSet(user.isPresent());
+
     }
 }
 

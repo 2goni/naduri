@@ -17,7 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().headers().frameOptions().disable()
                 .and()
                         // anyMatchers() 안의 경로는 permiAll()로 누구든 호출가능
-                        .authorizeRequests().antMatchers("/","/css/**","/images/**", "/js/**").permitAll()
+                        .authorizeRequests().antMatchers("/", "/images/**", "/js/**").permitAll()
                         // 그외의 경로(anyRequest) 는 authenticated()로 로그인된 사람만 호출가능
                         .anyRequest().authenticated()
                 .and()

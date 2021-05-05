@@ -19,15 +19,8 @@ public class LoginController {
     private final CheckUser checkUser;
     private final UserInfoRepository userInfoRepository;
 
-    @GetMapping("/")
-    public String login(Model model, @LoginUser SessionUser user){
-        if(user != null){
-            model.addAttribute("userName", user.getNickName());
-            if(!checkUser.isUser()){
-                return "signup";
-            }
-        }
-        return "main";
+    @GetMapping("/signin")
+    public void signin(){
     }
 
     @PostMapping("/signupuser")

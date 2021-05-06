@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.iptime.naduri.domain.BaseTimeEntity;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
@@ -21,6 +22,7 @@ public class CourseInModule extends BaseTimeEntity {
     private String courseInModuleTag;
 
     //코스의 모듈의 내용
+    @Column(length = 1000)
     private String courseInModuleContents;
 
     @Builder

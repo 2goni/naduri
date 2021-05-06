@@ -6,7 +6,7 @@ import org.iptime.naduri.domain.user_info.Platform;
 import org.iptime.naduri.domain.user_info.UserInfo;
 
 import java.util.Map;
-
+// 로그인 API의 내용을 뽑아서 UserInfo에 필요한 값 매칭
 @Getter
 public class OAuthAttributes {
     private Map<String, Object> attributes;
@@ -25,7 +25,7 @@ public class OAuthAttributes {
         this.profilePicture = profilePicture;
         this.platform = platform;
     }
-
+    // 플랫폼별 response 형태가 달라서 따로 골라내줌
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
         if("naver".equals(registrationId)){
             return ofNaver("id", attributes);
@@ -35,7 +35,7 @@ public class OAuthAttributes {
         }
         return ofGoogle(userNameAttributeName, attributes);
     }
-
+    //구글
     private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
         return OAuthAttributes.builder()
                 .nickName((String) attributes.get("name"))
@@ -46,7 +46,7 @@ public class OAuthAttributes {
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
-
+    //네이버
     private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes){
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
 
@@ -61,7 +61,7 @@ public class OAuthAttributes {
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
-
+    //카카오
     private static OAuthAttributes ofKakao(String userNameAttributeName, Map<String, Object> attributes){
         Map<String, Object> kakao_account = (Map<String, Object>) attributes.get("kakao_account");
         Map<String, Object> profile = (Map<String, Object>) kakao_account.get("profile");

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.iptime.naduri.domain.BaseTimeEntity;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
@@ -21,6 +22,7 @@ public class Review extends BaseTimeEntity {
     private Integer reviewGrade;
 
     //코스에 대한 유저리뷰내용, null 허용
+    @Column(length = 1000)
     private String reviewContents;
 
     @Builder

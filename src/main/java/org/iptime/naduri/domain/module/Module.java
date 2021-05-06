@@ -36,7 +36,7 @@ public class Module extends BaseTimeEntity {
     private String longitude;
 
     //모듈 설명
-    @Column(length = 500, nullable = false)
+    @Column(length = 1000, nullable = false)
     private String explanation;
 
     //이미지 PK(image_hosting 테이블의 id)

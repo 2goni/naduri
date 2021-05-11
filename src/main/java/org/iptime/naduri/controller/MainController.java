@@ -19,7 +19,7 @@ public class MainController {
     //유저가 회원인지 확인하는 개체
     private final CheckUser checkUser;
 
-    @RequestMapping("/main")
+    @RequestMapping("/")
     public String main(Model model, @LoginUser SessionUser user, @RequestParam Map<String, Object> param) {
         if (user != null) {
             model.addAttribute("userName", user.getNickName());

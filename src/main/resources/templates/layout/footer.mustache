@@ -1,0 +1,175 @@
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+-->
+
+
+<script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+<!--    -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<!--    -->
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=adf6j9fk15&submodules=geocoder"></script>
+<script>
+
+        $(document).ready(function(){
+            $("#sidebtn").click(function(){
+                $("#sidebar").css({left:0});
+            });
+            $("#exit3").click(function(){
+                $("#sidebar").css({left:-700});
+            });
+        });
+
+    navigator.geolocation
+    {
+        //위치 정보를 얻기
+        navigator.geolocation.getCurrentPosition(function (pos) {
+            var map = new naver.maps.Map("map", {
+                center: new naver.maps.LatLng(pos.coords.latitude,pos.coords.longitude),
+                zoom: 15,
+                mapTypeControl: true
+            });
+
+            map.setCursor(map.center);
+            searchCoordinateToAddress(map.center);
+
+
+            function searchCoordinateToAddress(latlng) {
+                naver.maps.Service.reverseGeocode({
+                    coords: latlng,
+                    orders: [
+                        naver.maps.Service.OrderType.ADDR,
+                        naver.maps.Service.OrderType.ROAD_ADDR
+                    ].join(',')
+                }, function(status, response) {
+                    if (status === naver.maps.Service.Status.ERROR) {
+                        if (!latlng) {
+                            return alert('ReverseGeocode Error, Please check latlng');
+                        }
+                        if (latlng.toString) {
+                            return alert('ReverseGeocode Error, latlng:' + latlng.toString());
+                        }
+                        if (latlng.x && latlng.y) {
+                            return alert('ReverseGeocode Error, x:' + latlng.x + ', y:' + latlng.y);
+                        }
+                        return alert('ReverseGeocode Error, Please check latlng');
+                    }
+
+                    var address = response.v2.address,
+                            htmlAddresses = [];
+
+                    if (address.jibunAddress !== '') {
+                        htmlAddresses.push(address.jibunAddress);
+                    }
+
+                    if (address.roadAddress !== '') {
+                        htmlAddresses.push(address.roadAddress);
+                    }
+
+                    document.getElementById("address1").innerHTML = ([
+                        '<div style="padding:10px;min-width:200px;line-height:150%;">',
+                        htmlAddresses[0],
+                        '</div>'
+                    ].join('\n'));
+
+                    var data2 = {
+                        "지번" : address.jibunAddress,
+                        "도로명주소" : address.roadAddress,
+                        "위도" : pos.coords.latitude,
+                        "경도" : pos.coords.longitude
+                    };
+                    // var list = [address.jibunAddress,address.roadAddress,pos.coords.latitude,pos.coords.longitude]
+                    //  console.log(list);
+                    // console.log(list.join(','));
+                    $.ajax({
+                        type:'POST',
+                        url:'main',
+                        data: {
+                            a:address.jibunAddress,
+                            b:address.roadAddress,
+                            c:pos.coords.latitude,
+                            d:pos.coords.longitude
+                        },
+                        success:function(){
+                            console.log("success");
+                        }
+                    })
+
+                });
+
+            }
+            function searchAddressToCoordinate(address) {
+                naver.maps.Service.geocode({
+                    query: address
+                }, function(status, response) {
+                    if (status === naver.maps.Service.Status.ERROR) {
+                        if (!address) {
+                            return alert('Geocode Error, Please check address');
+                        }
+                        return alert('Geocode Error, address:' + address);
+                    }
+
+                    if (response.v2.meta.totalCount === 0) {
+                        return alert('No result.');
+                    }
+
+                    var htmlAddresses = [],
+                            item = response.v2.addresses[0],
+                            point = new naver.maps.Point(item.x, item.y);
+
+                    if (item.roadAddress) {
+                        htmlAddresses.push('[도로명 주소] ' + item.roadAddress);
+                    }
+
+                    if (item.jibunAddress) {
+                        htmlAddresses.push('[지번 주소] ' + item.jibunAddress);
+                    }
+
+                    if (item.englishAddress) {
+                        htmlAddresses.push('[영문명 주소] ' + item.englishAddress);
+                    }
+                    map.setCenter(point);
+                });
+            }
+
+            function initGeocoder() {
+                if (!map.isStyleMapReady) {
+                    return;
+                }
+
+
+                map.addListener('click',function(e) {
+                    searchCoordinateToAddress(e.coord);
+                });
+
+                $('#address').on('keydown', function(e) {
+                    var keyCode = e.which;
+
+                    if (keyCode === 13) { // Enter Key
+                        searchAddressToCoordinate($('#address').val());
+                    }
+                });
+            }
+
+            $('#submit').on('click', function(e) {
+                e.preventDefault();
+
+                searchAddressToCoordinate($('#address').val());
+            });
+
+
+            naver.maps.onJSContentLoaded = initGeocoder;
+            naver.maps.Event.once(map, 'init_stylemap', initGeocoder);
+
+        });
+    }
+</script>
+</body>
+</html>

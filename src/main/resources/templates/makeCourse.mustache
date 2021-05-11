@@ -51,7 +51,76 @@
     </ul>
 </div>
 <!--nav-->
-<
-
-
+<div class="location">
+    <div id="address1"></div>
+</div>
+<div class="card w-100">
+    <div class="card-body">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <form method="post" action="/addCourse">
+                    {{#moduleListFirst}}
+                <div class="carousel-item active">
+                    <div class="card text-center">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-7">
+                                    <img src="http://naduri.iptime.org:8888/user/0ed402f199cfc5ee4344d7aaa3e25a3d2f362ec5773428fb7deaf5fb1a6ec663.jpg" width="170" height="170" alt="사진">
+                                </div>
+                                <div class="col-5">
+                                    <h5 class="card-title">{{moduleName}}</h5>
+                                    <p class="card-text">{{address}}</p>
+                                    <p class="card-text">{{explanation}}</p>
+                                </div>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                        </div>
+                    </div>
+                </div>
+                {{/moduleListFirst}}
+                {{#moduleList}}
+                <div class="carousel-item">
+                    <div class="card text-center">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-7">
+                                    <img src="http://naduri.iptime.org:8888/user/0ed402f199cfc5ee4344d7aaa3e25a3d2f362ec5773428fb7deaf5fb1a6ec663.jpg" width="170" height="170" alt="사진">
+                                </div>
+                                <div class="col-5">
+                                    <h5 class="card-title">{{moduleName}}</h5>
+                                    <p class="card-text">{{address}}</p>
+                                    <p class="card-text">{{explanation}}</p>
+                                </div>
+                                    <input type="text">
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                        </div>
+                    </div>
+                </div>
+{{/moduleList}}
+                </form>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
 {{>layout/footer}}

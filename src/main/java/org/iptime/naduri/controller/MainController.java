@@ -23,27 +23,11 @@ public class MainController {
     public String main(Model model, @LoginUser SessionUser user, @RequestParam Map<String, Object> param) {
         if (user != null) {
             model.addAttribute("userName", user.getNickName());
+            model.addAttribute("userPicture", user.getProfilepicture());
             if (!checkUser.isUser()) {
                 return "signup";
             }
         }
-        String a =(String) param.get("a");
-        String b =(String) param.get("b");
-        String c =(String) param.get("c");
-        String d =(String) param.get("d");
-        if(a != null){
-            System.out.println(a);
-        }
-        if(b != null){
-            System.out.println(b);
-        }
-        if(c != null){
-            System.out.println(c);
-        }
-        if(d != null){
-            System.out.println(d);
-        }
-
         return "main";
     }
 }

@@ -1,0 +1,57 @@
+{{>layout/header}}
+
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+        <button class="navbar-toggler ml-auto custom-toggler" id="sidebtn" style="background-color: #e3f2fd;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a href="/">
+            <img class="photo" width="30" height="30" src="/balbal.svg">
+        </a>
+        {{^userName}}
+            <p class="fst-italic">Naduri </p>
+        {{/userName}}
+        {{#userName}}
+            <button onclick="location.href='/makeCourse'"> 코스등록 </button>
+        {{/userName}}
+    </div>
+    <div id="map">
+
+    </div>
+</nav>
+<!--<div class="collapse" id="navbarToggleExternalContent" >-->
+<!--    <div class="bg-white p-4">-->
+<!--        <h5 class="text-dark h4">Collapsed content</h5>-->
+<!--        <span class="text-muted">Toggleable via the navbar brand.</span>-->
+<!--    </div>-->
+<!--</div>-->
+<div id="sidebar" style="position:absolute; background:#e3f2fd; width:700px; height:100%; top:0; left:-700px;z-index: 10;transition: 1s;"   >
+    {{^userName}}
+    <a href="/signin">
+    <div id="login">
+        <i class="fas fa-user-alt"></i>
+        <span>로그인을 해주세요</span>
+    {{/userName}}
+    {{#userName}}
+    <div id="login">
+        <img src="{{userPicture}}">
+        <a href="/logout"> 로그아웃 </a>
+    {{/userName}}
+
+</div>
+</a>
+    <hr>
+    <i id="exit3" class="fas fa-times-circle" style="position:absolute; right:0; top:0; font-size:30px; margin-right:10px; margin-top:10px; " ></i>
+    <ul style="list-style:none; margin:0;">
+        <li>나의 코스 목록</li>
+        <li>나의 코스 목록</li>
+        <li>나의 코스 목록</li>
+        <li>나의 코스 목록</li>
+        <li>나의 코스 목록</li>
+    </ul>
+</div>
+<!--nav-->
+<
+
+
+{{>layout/footer}}

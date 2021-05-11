@@ -8,7 +8,12 @@
         <a href="/">
             <img class="photo" width="30" height="30" src="/balbal.svg">
         </a>
-        <p class="fst-italic">Naduri </p>
+        {{^userName}}
+            <p class="fst-italic">Naduri </p>
+        {{/userName}}
+        {{#userName}}
+            <button onclick="location.href='/makeCourse'"> 코스등록 </button>
+        {{/userName}}
     </div>
     <div id="map">
 
@@ -21,10 +26,23 @@
 <!--    </div>-->
 <!--</div>-->
 <div id="sidebar" style="position:absolute; background:#e3f2fd; width:700px; height:100%; top:0; left:-700px;z-index: 10;transition: 1s;"   >
+    {{^userName}}
     <a href="/signin">
         <div id="login">
             <i class="fas fa-user-alt"></i>
             <span>로그인을 해주세요</span>
+    {{/userName}}
+                {{#userName}}
+                <div id="login">
+                {{#userPicture}}
+                    <img src="{{userPicture}}">
+                {{/userPicture}}
+                {{^userPicture}}
+                    <i class="fas fa-user-alt"></i>
+                {{/userPicture}}
+                    <a href="/logout"> 로그아웃 </a>
+                {{/userName}}
+
         </div>
     </a>
     <hr>
@@ -59,10 +77,10 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-7">
-                                    <img src="/temp1.jpeg" width="170" height="170" alt="사진">
+                                    <img src="http://naduri.iptime.org:8888/user/0ed402f199cfc5ee4344d7aaa3e25a3d2f362ec5773428fb7deaf5fb1a6ec663.jpg" width="170" height="170" alt="사진">
                                 </div>
                                 <div class="col-5">
-                                    <h5 class="card-title">태그(ex_#수원#권선동)</h5>
+                                    <h5 class="card-title">수원나들이 코스</h5>
                                     <a href="/" style="color:black" class="btn btn-primary">별점+코멘트
                                         <img src="/star.png" class="rounded" width="15" height="15" alt="리뷰 목록으로">
                                         <img src="/star_half.png" class="rounded" width="15" height="15" alt="리뷰 목록으로">&nbsp;2.5
@@ -138,6 +156,5 @@
         </div>
     </div>
 </div>
-</html>
 
 {{>layout/footer}}
